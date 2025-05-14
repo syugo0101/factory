@@ -72,6 +72,32 @@ function fetchAndDisplayCSV(filePath) {
 
       html += "</tbody></table>";
       section.innerHTML = html;
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+      }
+
+  // ★ コピー機能（リンク以外）
+  document.querySelectorAll("table td, table th").forEach(cell => {
+    cell.style.cursor = "pointer";
+    cell.addEventListener("click", (event) => {
+      // もしクリック対象が <a> だったらコピー処理しない
+      if (event.target.tagName === "A") return;
+
+      const text = cell.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`コピーしました: ${text}`);
+      }).catch(err => {
+        console.error("コピーに失敗しました", err);
+      });
+    });
+  });
     },
     error: function(err) {
       const section = document.querySelector("main section");
