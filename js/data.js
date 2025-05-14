@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchAndDisplayCSV(filePath) {
   Papa.parse(filePath, {
+    skipEmptyLines: true,  // ★ここを追加
     download: true,
     header: true,
     complete: function(results) {
@@ -33,7 +34,7 @@ function fetchAndDisplayCSV(filePath) {
         return;
       }
 
-      let html = "<table border='1'><thead><tr>";
+      let html = "<table><thead><tr>";
       for (let key in data[0]) {
         html += `<th>${key}</th>`;
       }
@@ -42,7 +43,14 @@ function fetchAndDisplayCSV(filePath) {
       data.forEach(row => {
         html += "<tr>";
         for (let key in row) {
-          html += `<td>${row[key]}</td>`;
+          let value = row[key];
+
+          // ★ URLをリンク化
+          if (typeof value === "string" && value.match(/^https?:\/\//)) {
+            value = `<a href="${value}" target="_blank" rel="noopener noreferrer">${value}</a>`;
+          }
+
+          html += `<td>${value}</td>`;
         }
         html += "</tr>";
       });
