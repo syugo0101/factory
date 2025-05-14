@@ -111,64 +111,8 @@ nav .now::after{
 
 /*ここまで共通*/
 
-.layout {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  align-items: flex-start;
-}
-
-/* メイン（左3/4） */
-.layout main {
-  flex: 3;
-}
-
-/* サイドバー（右1/4） */
-.layout aside {
-  flex: 1;
-  background-color: #333;  /* 任意：目立たせる */
-  padding: 10px;
-}
-
-aside h2 {
-  background-color: #000;         /* 黒背景 */
-  color: white;                   /* 白文字 */
-  padding: 10px 15px;             /* 内側の余白 */
-  position: relative;             /* 疑似要素の基準に */
-  margin: 20px 0;                 /* 上下の外側余白 */
-  text-align: center;             /* 中央揃え（任意） */
-}
-
-/* 上下のオレンジライン */
-aside h2::before,
-aside h2::after {
-  content: "";
-  display: block;
-  height: 3px;
-  background-color: #FFAA46;  /* オレンジ色 */
-  width: 100%;
-}
-
-aside h2::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-aside h2::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 main{
-  padding:10px 15px;
-}
-
-main section h3{
-  color: #D95D07;
-  text-align: center;
-  padding:10px 15px;
+    padding: 10px 15px;
 }
 
 main section {
@@ -176,8 +120,4 @@ main section {
   border-radius: 16px;
   padding:10px;
   background-color: #333;
-}
-
-  main section p {
-  height: 500px; /* ただし実際のテキストに応じて削除してOK */
 }
