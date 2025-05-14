@@ -1,166 +1,190 @@
-/* リセット */
+/* ========== リセット & 基本スタイル ========== */
 * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #1F1E1E;
-    color: white;
+  background-color: #1F1E1E;
+  color: white;
 }
 
-/* 共通リンクスタイル */
+/* ========== リンク共通 ========== */
 a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 a:visited {
-    color: white;
+  color: white;
 }
 
-/* ヘッダー内のリンク（ロゴとして使用） */
+/* ========== ヘッダー ========== */
 header a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-/* ヘッダー内の画像とタイトル */
 header .hero {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 header .hero img {
-    max-width: 40px;
-    width: 100%;
-    height: auto;
-    display: block;
+  max-width: 40px;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 header h1 {
-    font-size: 14px; /* 必要に応じて調整 */
+  font-size: 14px;
 }
 
-/* ナビゲーション */
+/* ========== ナビゲーション ========== */
 .sticky-nav {
-    background-color: #D95D07;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  background-color: #D95D07;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 nav ul {
-    margin-left: 50px;
-    display: flex;
-    justify-content: left;
+  margin-left: 50px;
+  display: flex;
+  justify-content: left;
 }
 
 nav a {
-    display: inline-block;
-    padding: 10px;
-    white-space: nowrap;
+  display: inline-block;
+  padding: 10px;
+  white-space: nowrap;
 }
-
 nav a:hover {
-    background-color: #FFAA46;
-    color: black;
+  background-color: #FFAA46;
+  color: black;
 }
 
-nav .now::after{
+nav .now::after {
   content: "";
   display: block;
   height: 3px;
-  background-color: #FFAA46;  /* オレンジ色 */
+  background-color: #FFAA46;
   width: 100%;
 }
 
-/*ここまで共通*/
-
-main{
-  padding:10px 15px;
+/* ドロップダウン */
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -100%;
+  background-color: #444;
+  min-width: 160px;
+  z-index: 1000;
+  margin-top: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.dropdown-menu li a {
+  display: block;
+  padding: 10px;
+  white-space: nowrap;
+}
+.dropdown-menu li a:hover {
+  background-color: #FFAA46;
+  color: black;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
+/* ========== メインエリア共通 ========== */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+
+/* セクションの共通スタイル */
 main section {
-  margin-bottom: 20px;
+  background-color: #333;
   border-radius: 16px;
   padding: 20px;
-  background-color: #333;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
 }
 
+/* セクションタイトル */
+main section h3 {
+  text-align: center;
+  color: #D95D07;
+  padding: 10px 0;
+}
+
+/* リンクリスト共通（●付き＋hover） */
 main section a {
   position: relative;
   padding-left: 1.2em;
   color: white;
-  text-decoration: none;
   transition: all 0.2s ease;
 }
 
-/* ● を前につける */
 main section a::before {
   content: "●";
   position: absolute;
   left: 0;
+  top: 50%;
+  transform: translateY(-50%);
   color: #FFAA46;
   font-size: 0.8em;
   line-height: 1;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-/* hover で下線（オレンジ）を表示 */
 main section a:hover {
   text-decoration: underline;
   text-decoration-color: #FFAA46;
   text-underline-offset: 4px;
 }
 
-main div{
-    display: flex;
-    align-items: flex-start;
-    padding:20px;
-    gap: 20px;
+/* ========== 一覧 + おまけ の並列表示 ========== */
+main > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-main section h3{
-  color: #D95D07;
+/* 各セクションのサイズ調整 */
+.list-main,
+.list-sub {
+  flex: 1 1 300px;
+  max-width: 480px;
+}
+
+/* .list-main の一部のリストアイテムが縦方向で正しく整列する */
+.list-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+/* .list-sub は縦並び */
+.list-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 各セクションにmargin-bottomをつけて、タイトルとリストが混在しないように */
+.list-main h3 {
+  grid-column: 1 / -1;  /* 横幅いっぱいに広がる */
   text-align: center;
-  padding:10px 15px;
-}
-
-.dropdown {
-  position: relative; /* 親要素は相対位置 */
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;  /* 親要素の真下に表示 */
-  left: -100%; /* 少し左に寄せる */
-  background-color: #444;
-  min-width: 160px;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 0px;  /* 隙間をゼロに近づける（ほんの少し上にする） */
-}
-
-.dropdown-menu li a {
-  display: block;
-  padding: 10px;
-  color: white;
-  white-space: nowrap;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #FFAA46;
-  color: black;
-}
-
-/* ホバー時に表示 */
-.dropdown:hover .dropdown-menu {
-  display: block;
+  color: #D95D07;
+  padding: 10px 0;
 }

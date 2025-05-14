@@ -1,95 +1,96 @@
-/* リセット */
+/* ======= リセット ======= */
 * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #1F1E1E;
-    color: white;
+  background-color: #1F1E1E;
+  color: white;
 }
 
-/* 共通リンクスタイル */
+/* ======= 共通リンクスタイル ======= */
 a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 a:visited {
-    color: white;
+  color: white;
 }
 
-/* ヘッダー内のリンク（ロゴとして使用） */
+/* ======= ヘッダー ======= */
 header a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-/* ヘッダー内の画像とタイトル */
 header .hero {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 header .hero img {
-    max-width: 40px;
-    width: 100%;
-    height: auto;
-    display: block;
+  max-width: 40px;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 header h1 {
-    font-size: 14px; /* 必要に応じて調整 */
+  font-size: 14px;
 }
 
-/* ナビゲーション */
+/* ======= ナビゲーション（sticky）======= */
 .sticky-nav {
-    background-color: #D95D07;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  background-color: #D95D07;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 nav ul {
-    margin-left: 50px;
-    display: flex;
-    justify-content: left;
+  margin-left: 50px;
+  display: flex;
+  justify-content: left;
 }
 
 nav a {
-    display: inline-block;
-    padding: 10px;
-    white-space: nowrap;
+  display: inline-block;
+  padding: 10px;
+  white-space: nowrap;
 }
 
 nav a:hover {
-    background-color: #FFAA46;
-    color: black;
+  background-color: #FFAA46;
+  color: black;
 }
 
-nav .now::after{
+/* 現在のページの下線 */
+nav .now::after {
   content: "";
   display: block;
   height: 3px;
-  background-color: #FFAA46;  /* オレンジ色 */
+  background-color: #FFAA46;
   width: 100%;
 }
 
+/* ======= ドロップダウンメニュー ======= */
 .dropdown {
-  position: relative; /* 親要素は相対位置 */
+  position: relative;
 }
 
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;  /* 親要素の真下に表示 */
-  left: -100%; /* 少し左に寄せる */
+  top: 100%;
+  left: -100%;
   background-color: #444;
   min-width: 160px;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 0px;  /* 隙間をゼロに近づける（ほんの少し上にする） */
+  margin-top: 0;
 }
 
 .dropdown-menu li a {
@@ -104,56 +105,58 @@ nav .now::after{
   color: black;
 }
 
-/* ホバー時に表示 */
+/* ホバー時にメニューを表示 */
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-/*ここまで共通*/
-
-main{
-    padding: 10px 15px;
+/* ======= メインコンテンツ ======= */
+main {
+  max-width: 1000px;
+  padding: 10px 15px;
+  margin: 0 auto;
 }
 
 main section {
   margin-bottom: 20px;
   border-radius: 16px;
-  padding:10px;
+  padding: 10px;
   background-color: #333;
 }
 
+/* ======= テーブル ======= */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 14px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
 }
 
-table a:hover{
-    color: blue;
+table a:hover {
+  color: blue;
 }
 
 thead th {
-    background-color: #444;
-    color: #fff;
-    padding: 10px;
-    border: 1px solid #666;
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #666;
 }
 
 tbody td {
-    padding: 8px;
-    border: 1px solid #555;
-    background-color: #2a2a2a;
-    color: white;
+  padding: 8px;
+  border: 1px solid #555;
+  background-color: #2a2a2a;
+  color: white;
 }
 
 /* 偶数行の背景色を少し変えて見やすく */
 tbody tr:nth-child(even) td {
-    background-color: #333;
+  background-color: #333;
 }
 
 /* ホバー時にハイライト */
 tbody tr:hover td {
-    background-color: #555;
-    cursor: default;
+  background-color: #555;
+  cursor: default;
 }

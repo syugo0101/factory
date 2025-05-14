@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本国内工場データベース</title>
+    <link rel="stylesheet" href="css/csv_download.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <section class="hero">
+                <figure>
+                    <img src="images/factory.png" alt="アイコン">
+                </figure>
+            </section>
+            <h1>JAPAN FACTORY DATABASE</h1>
+        </a>
+    </header>
+
+    <nav class="sticky-nav">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li class="dropdown">
+                <a class="now">データ</a>
+                <ul class="dropdown-menu">
+                    <li><a href="list.html">工場分類</a></li>
+                    <li><a href="csv_download.html" class="now">CSVダウンロード</a></li>
+                </ul>
+            </li>
+            <li><a href="#">お問い合わせ</a></li>
+        </ul>
+    </nav>
+
+<main>
+  <h2>CSVデータダウンロード</h2>
+
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>ファイル名</th>
+          <th>ダウンロード</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>サンプル</td><td>sample.csv</td><td><a href="data/sample.csv" download>ダウンロード</a></td></tr>
+        <tr><td>製鉄所</td><td>steel.csv</td><td><a href="data/steel.csv" download>ダウンロード</a></td></tr>
+        <tr><td>製油所</td><td>oil.csv</td><td><a href="data/oil.csv" download>ダウンロード</a></td></tr>
+        <tr><td>エチレンプラント</td><td>ethylene.csv</td><td><a href="data/ethylene.csv" download>ダウンロード</a></td></tr>
+        <tr><td>アルミニウム製錬所</td><td>aluminum.csv</td><td><a href="data/aluminum.csv" download>ダウンロード</a></td></tr>
+        <tr><td>その他非鉄金属製錬所</td><td>nonferrous.csv</td><td><a href="data/nonferrous.csv" download>ダウンロード</a></td></tr>
+        <tr><td>セメント工場</td><td>cement.csv</td><td><a href="data/cement.csv" download>ダウンロード</a></td></tr>
+        <tr><td>製紙工場</td><td>paper.csv</td><td><a href="data/paper.csv" download>ダウンロード</a></td></tr>
+        <tr><td>自動車組立工場</td><td>auto.csv</td><td><a href="data/auto.csv" download>ダウンロード</a></td></tr>
+        <tr><td>造船所</td><td>ship.csv</td><td><a href="data/ship.csv" download>ダウンロード</a></td></tr>
+        <tr><td>鉄道車両工場</td><td>rail.csv</td><td><a href="data/rail.csv" download>ダウンロード</a></td></tr>
+        <tr><td>エンジン・タービン組立工場</td><td>engine.csv</td><td><a href="data/engine.csv" download>ダウンロード</a></td></tr>
+        <tr><td>電気・ガス・石油機器工場（家庭用）</td><td>homegas.csv</td><td><a href="data/homegas.csv" download>ダウンロード</a></td></tr>
+        <tr><td>電気・ガス・石油機器工場（業務用）</td><td>progas.csv</td><td><a href="data/progas.csv" download>ダウンロード</a></td></tr>
+        <tr><td>電機工場（重電）</td><td>heavyel.csv</td><td><a href="data/heavyel.csv" download>ダウンロード</a></td></tr>
+        <tr><td>電機工場（昇降機）</td><td>elevator.csv</td><td><a href="data/elevator.csv" download>ダウンロード</a></td></tr>
+        <tr><td>電機工場（音響）</td><td>audio.csv</td><td><a href="data/audio.csv" download>ダウンロード</a></td></tr>
+        <tr><td>半導体工場（昭和63年時点）</td><td>semi.csv</td><td><a href="data/semi.csv" download>ダウンロード</a></td></tr>
+        <tr><td>飛行機組立工場（昭和17年時点）</td><td>airplane.csv</td><td><a href="data/airplane.csv" download>ダウンロード</a></td></tr>
+        <tr><td>陸軍造兵廠・海軍工廠（昭和17年時点）</td><td>arsenal.csv</td><td><a href="data/arsenal.csv" download>ダウンロード</a></td></tr>
+        <tr><td>アルミナ製錬と車扱貨物</td><td>alumina.csv</td><td><a href="data/alumina.csv" download>ダウンロード</a></td></tr>
+      </tbody>
+    </table>
+
+    </section>
+</main>
+
+    <footer>
+        <p>&copy; 2025 日本国内工場データベース. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
