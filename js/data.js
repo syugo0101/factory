@@ -1,8 +1,10 @@
+import { setupSearch } from './search.js';
+
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
 
-    const typeMap = {
+  const typeMap = {
     sample: "サンプル",
     steel: "製鉄所",
     oil: "製油所",
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     airplane: "飛行機組立工場(昭和17年時点)",
     arsenal: "陸軍造兵廠·海軍工廠(昭和17年時点)",
     alumina: "アルミナ製錬と車扱貨物"
-    };
+  };
 
   const displayName = typeMap[type] || "不明な分類";
   const csvFile = `data/${type}.csv`;
@@ -37,71 +39,95 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchAndDisplayCSV(filePath) {
   Papa.parse(filePath, {
-    skipEmptyLines: true,  // ★ここを追加
+    skipEmptyLines: true,
     download: true,
     header: true,
-    complete: function(results) {
+    complete: function (results) {
       const data = results.data;
-      const section = document.querySelector("main section");
-
-      if (!data || data.length === 0 || Object.keys(data[0]).length === 0) {
-        section.innerHTML = "<p>CSVデータが見つかりませんでした。</p>";
+      const tableContainer = document.getElementById("tableContainer");
+      if (!tableContainer) {
+        console.error("tableContainer が見つかりません。");
         return;
       }
 
-      let html = "<table><thead><tr>";
-      for (let key in data[0]) {
-        html += `<th>${key}</th>`;
+      const headers = data.length > 0 ? Object.keys(data[0]) : [];
+
+      tableContainer.innerHTML = "";
+
+      if (!data || data.length === 0 || headers.length === 0) {
+        tableContainer.innerHTML = "<p>CSVデータが見つかりませんでした。</p>";
+        return;
       }
-      html += "</tr></thead><tbody>";
 
-      data.forEach(row => {
-        html += "<tr>";
-        for (let key in row) {
-          let value = row[key];
+      function renderTable(tableData) {
+        tableContainer.innerHTML = "";
 
-          // ★ URLをリンク化
-          if (typeof value === "string" && value.match(/^https?:\/\//)) {
-            value = `<a href="${value}" target="_blank" rel="noopener noreferrer">${value}</a>`;
-          }
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
 
-          html += `<td>${value}</td>`;
+        const headerRow = document.createElement("tr");
+        headers.forEach(key => {
+          const th = document.createElement("th");
+          th.textContent = key;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        if (tableData.length === 0) {
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.textContent = "該当データがありません";
+          td.colSpan = headers.length;
+          td.style.textAlign = "center";
+          td.style.padding = "10px";
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        } else {
+          tableData.forEach(row => {
+            const tr = document.createElement("tr");
+            headers.forEach(key => {
+              const td = document.createElement("td");
+              const value = row[key];
+              if (typeof value === "string" && value.match(/^https?:\/\//)) {
+                const a = document.createElement("a");
+                a.href = value;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = value;
+                td.appendChild(a);
+              } else {
+                td.textContent = value ?? "";
+              }
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
         }
-        html += "</tr>";
-      });
 
-      html += "</tbody></table>";
-      section.innerHTML = html;
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
 
-      function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 2000);
+        // コピー機能
+        table.querySelectorAll("td, th").forEach(cell => {
+          cell.style.cursor = "pointer";
+          cell.addEventListener("click", (event) => {
+            if (event.target.tagName === "A") return;
+            const text = cell.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+              const toast = document.getElementById("toast");
+              toast.textContent = `コピーしました: ${text}`;
+              toast.classList.add("show");
+              setTimeout(() => toast.classList.remove("show"), 2000);
+            });
+          });
+        });
       }
 
-  // ★ コピー機能（リンク以外）
-  document.querySelectorAll("table td, table th").forEach(cell => {
-    cell.style.cursor = "pointer";
-    cell.addEventListener("click", (event) => {
-      // もしクリック対象が <a> だったらコピー処理しない
-      if (event.target.tagName === "A") return;
-
-      const text = cell.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        showToast(`コピーしました: ${text}`);
-      }).catch(err => {
-        console.error("コピーに失敗しました", err);
-      });
-    });
-  });
-    },
-    error: function(err) {
-      const section = document.querySelector("main section");
-      section.innerHTML = `<p>CSVの読み込みに失敗しました: ${err.message}</p>`;
+      // 初期表示＋フィルターUI生成＋検索機能セットアップ
+      renderTable(data);
+      setupSearch(data, renderTable);
     }
   });
 }
