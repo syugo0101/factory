@@ -178,6 +178,42 @@ main section {
   background-color: #333;
 }
 
-  main section p {
-  height: 500px; /* ただし実際のテキストに応じて削除してOK */
+.status-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.status-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+}
+
+.bullet {
+  color: #ffaa46;
+  font-weight: bold;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.done {
+  color: #00cc66;
+}
+
+.status.in-progress {
+  color: #ffaa46;
+}
+
+.status.not-done {
+  color: #ff4444;
+}
+
+.status.partial {
+  color: #66ccff;
 }
