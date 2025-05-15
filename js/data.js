@@ -34,6 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const h2 = document.querySelector("main h2");
   h2.textContent = `${displayName}の工場データ一覧`;
 
+  // 前文読み込み
+  fetch("descriptions.json")
+    .then(response => response.json())
+    .then(descriptions => {
+      const descriptionText = descriptions[type];
+      if (descriptionText) {
+        const descElem = document.getElementById("descriptionText");
+        const descSection = document.getElementById("descriptionSection");
+        if (descElem && descSection) {
+          descElem.textContent = descriptionText;
+          descSection.style.display = "block";
+        }
+      }
+    })
+    .catch(err => {
+      console.warn("前文の読み込みに失敗しました：", err);
+    });
+
   fetchAndDisplayCSV(csvFile);
 });
 
