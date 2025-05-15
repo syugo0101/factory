@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const type = params.get("type");
 
   const typeMap = {
-    sample: "サンプル",
     steel: "製鉄所",
     oil: "製油所",
     ethylene: "エチレンプラント",
